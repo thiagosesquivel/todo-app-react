@@ -2,8 +2,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRouter';
-import Login from '../pages/login';
-import TasksPage from '../pages/tasks';
+import Login from '@/features/auth/pages/LoginPage';
+import TasksPage from '@/features/tasks/pages/TaskPage';
 
 const AppRoutes: React.FC = () => {
   return (

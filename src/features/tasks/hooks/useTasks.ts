@@ -4,8 +4,9 @@ import {
   createTask,
   updateTask,
   deleteTask,
-} from "../services/tasksService";
-import useNotification from "../hooks/useNotification"; // Hook de notificações
+} from "@/features/tasks/services/tasksService";
+import useNotification from "@/shared/NotificationList/hooks/useNotification";
+const { notify } = useNotification();
 
 // Hook para buscar todas as tarefas
 export const useTasks = () => {
@@ -15,7 +16,6 @@ export const useTasks = () => {
 // Hook para criar uma tarefa
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
-  const { notify } = useNotification();
 
   return useMutation({
     mutationFn: createTask,
@@ -38,7 +38,6 @@ export const useCreateTask = () => {
 // Hook para atualizar uma tarefa
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
-  const { notify } = useNotification();
 
   return useMutation({
     mutationFn: updateTask,
@@ -58,7 +57,6 @@ export const useUpdateTask = () => {
 // Hook para deletar uma tarefa
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
-  const { notify } = useNotification();
 
   return useMutation({
     mutationFn: deleteTask,

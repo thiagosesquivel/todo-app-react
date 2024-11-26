@@ -1,4 +1,4 @@
-import { NotificationList } from "./components/NotificationList";
+import  NotificationList  from "@/shared/NotificationList/components/NotificationList";
 import AppRoutes from "./router";
 
 function App() {

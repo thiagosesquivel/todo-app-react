@@ -1,11 +1,7 @@
-import api from "../provider/api";
+import {api} from "@/provider/index";
+import { Task } from "@/features/tasks/types";
 
-export interface Task {
-  id: string;
-  title: string;
-  description?: string;
-  completed: boolean;
-}
+
 
 export const fetchTasks = async (): Promise<Task[]> => {
   const { data } = await api.get<Task[]>("/tasks");
@@ -18,13 +14,13 @@ export const createTask = async (task: Omit<Task, "id">): Promise<Task> => {
 };
 
 export const updateTask = async ({ id,  updatedTask,}:{
-  id: string;
+  id: number;
   updatedTask: Partial<Omit<Task, "id">>;
 }): Promise<Task> => {
   const { data } = await api.put<Task>(`/tasks/${id}`, updatedTask);
   return data;
 };
 
-export const deleteTask = async (id: string): Promise<void> => {
+export const deleteTask = async (id: number): Promise<void> => {
   await api.delete(`/tasks/${id}`);
 };

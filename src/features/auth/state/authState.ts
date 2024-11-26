@@ -14,7 +14,7 @@ interface AuthState {
   initialize: () => void; // Inicializa o estado no carregamento da aplicação
 }
 
-const authStore = create<AuthState>((set) => ({
+const authState = create<AuthState>((set) => ({
   user: null,
   authenticated: false,
 
@@ -44,4 +44,4 @@ const authStore = create<AuthState>((set) => ({
   },
 }));
 
-export default authStore;
+export default authState;

@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { Checkbox, ListItem, ListItemText, IconButton, TextField } from "@mui/material";
 import { Edit, Delete, Check } from "@mui/icons-material";
+import { Task } from "@/features/tasks/types";
 
-interface Task {
-  id: string;
-  title: string;
-  description?: string;
-  completed: boolean;
-}
 
 interface TaskItemProps {
   task: Task;
-  onToggle: (id: string, completed: boolean) => void;
-  onEdit: (id: string, newTitle: string) => void;
-  onDelete: (id: string) => void;
+  onToggle: (id: number, completed: boolean) => void;
+  onEdit: (id: number, newTitle: string) => void;
+  onDelete: (id: number) => void;
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onEdit, onDelete }) => {

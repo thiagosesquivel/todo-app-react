@@ -6,22 +6,20 @@ import {
   List,
   CircularProgress,
 } from "@mui/material";
-import { TaskItem } from "../../components/TaskItem";
 import {
   useTasks,
   useCreateTask,
   useUpdateTask,
   useDeleteTask,
-} from "../../hooks/useTasks";
-import authStore from "../../store/authStore";
-import { Layout } from "../../layout/main";
+} from "@/features/tasks/hooks/useTasks";
+import { Layout } from "@/shared/layout/Layout";
+import { TaskItem } from "@/features/tasks/components/TaskItem";
 
 const TasksPage = () => {
   const { data: tasks, isPending } = useTasks();
   const createTask = useCreateTask();
   const updateTask = useUpdateTask();
   const deleteTask = useDeleteTask();
-  const logout = authStore((state) => state.logout);
 
   const [newTask, setNewTask] = useState("");
 
@@ -32,15 +30,15 @@ const TasksPage = () => {
     setNewTask("");
   };
 
-  const handleEditTask = (id: string, newTitle: string) => {
+  const handleEditTask = (id: number, newTitle: string) => {
     updateTask.mutate({ id, updatedTask: { title: newTitle } });
   };
 
-  const handleDeleteTask = (id: string) => {
+  const handleDeleteTask = (id: number) => {
     deleteTask.mutate(id);
   };
 
-  const handleToggleTask = (id: string, completed: boolean) => {
+  const handleToggleTask = (id: number, completed: boolean) => {
     updateTask.mutate({ id, updatedTask: { completed: !completed } });
   };
 
@@ -52,7 +50,7 @@ const TasksPage = () => {
     );
 
   return (
-    <Layout onLogout={logout}>
+    <Layout>
       {/* Container do CRUD */}
       <Box
         sx={{

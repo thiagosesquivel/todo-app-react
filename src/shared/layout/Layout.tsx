@@ -14,21 +14,21 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import authState from "@/features/auth/state/authState";
 
 interface LayoutProps {
   children: React.ReactNode; // Conteúdo principal da página
-  onLogout: () => void; // Função de logout
 }
 
 const drawerWidth = 240;
 
-export const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null); // Âncora para o menu
   const [selectedOption, setSelectedOption] = useState<string | null>(null); // Opção selecionada
-
+  const onLogout = authState((state) => state.logout);
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
   const handleOptionClick = (event: React.MouseEvent<HTMLElement>, option: string) => {

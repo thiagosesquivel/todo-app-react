@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Notification from './Notification';
-import useNotificationStore from '../../store/notificationStore';
+import useNotificationStore from '../state/notificationState';
 
 const NotificationList: React.FC = () => {
   const notifications = useNotificationStore((state) => state.notifications);

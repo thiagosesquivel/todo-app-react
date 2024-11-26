@@ -8,8 +8,8 @@ import {
   Alert,
   CircularProgress,
 } from "@mui/material";
-import useAuthStore from "../../store/authStore";
-import { useAuth } from "../../hooks/useAuth";
+import useAuthStore from "../state/authState";
+import { useAuth } from "../hooks/useAuth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
