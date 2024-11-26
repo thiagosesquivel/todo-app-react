@@ -12,7 +12,7 @@ import {
   useUpdateTask,
   useDeleteTask,
 } from "@/features/tasks/hooks/useTasks";
-import { Layout } from "@/shared/layout/Layout";
+import { Layout } from "@/shared/Layout";
 import { TaskItem } from "@/features/tasks/components/TaskItem";
 
 const TasksPage = () => {
@@ -51,10 +51,10 @@ const TasksPage = () => {
 
   return (
     <Layout>
-      {/* Container do CRUD */}
       <Box
         sx={{
           maxWidth: 600,
+          marginTop:4,
           width: "100%",
           marginRight: "auto", // Alinha mais à esquerda
         }}

@@ -1,12 +1,6 @@
-// src/provider/api/api.ts
 import axios, { AxiosInstance } from "axios";
 
-/**
- * Cria uma instância personalizada do Axios.
- * @param token Token de autenticação (opcional).
- * @param logout Função para logout em caso de erro 401.
- * @returns Instância configurada do Axios.
- */
+
 export const createApiClient = (
   token: string | null,
   logout: () => void

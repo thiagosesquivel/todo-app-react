@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Notification from './Notification';
-import useNotificationStore from '../state/notificationState';
+import { notificationState } from '@/shared/NotificationList/state/notificationState';
 
 const NotificationList: React.FC = () => {
-  const notifications = useNotificationStore((state) => state.notifications);
-  const removeNotification = useNotificationStore((state) => state.removeNotification);
+  const notifications = notificationState((state) => state.notifications);
+  const removeNotification = notificationState((state) => state.removeNotification);
 
   return (
     <Box
@@ -19,12 +19,12 @@ const NotificationList: React.FC = () => {
         zIndex: 1000,
       }}
     >
-      {notifications.map(({ id, message, color }) => (
+      {notifications.map(({ id, message, type }) => (
         <Notification
           key={id}
           id={id}
           message={message}
-          color={color}
+          color={type}
           onClose={removeNotification}
         />
       ))}

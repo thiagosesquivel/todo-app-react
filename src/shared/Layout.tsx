@@ -44,7 +44,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const drawerContent = (
     <Box
       sx={{
-        width: isMobile ? "auto" : drawerWidth,
+        width:drawerWidth,
         backgroundColor: "primary.main",
         color: "#fff",
         height: "100%",
@@ -115,7 +115,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           }}
         >
           <IconButton color="inherit" edge="start" onClick={toggleDrawer}>
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
           <Button variant="contained" color="error" onClick={onLogout}>
             Logout
@@ -168,14 +168,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           horizontal: "left",
         }}
       >
-        <Box sx={{ p: 2, minWidth: 200 }}>
-          <Typography variant="h6" gutterBottom>
-            {selectedOption}
-          </Typography>
-          <Button variant="text" onClick={handleCloseMenu}>
+        <Box sx={{ p: 2, minWidth: 200, display:'flex', flexDirection:'column'}}>
+          <Button variant="text"  onClick={handleCloseMenu}>
             Ação 1
           </Button>
-          <Button variant="text" onClick={handleCloseMenu}>
+          <Button variant="text"  onClick={handleCloseMenu}>
             Ação 2
           </Button>
         </Box>

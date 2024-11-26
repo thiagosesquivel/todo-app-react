@@ -1,10 +1,10 @@
-import { create } from 'zustand';
+// src/shared/notifications/store/notificationStore.ts
+import { create } from "zustand";
 
 interface Notification {
   id: string;
   message: string;
-  color: 'info' | 'success' | 'warning' | 'error';
-  duration?: number; // Adicionado o tempo de exibição
+  type: "success" | "error" | "info" | "warning";
 }
 
 interface NotificationState {
@@ -13,16 +13,15 @@ interface NotificationState {
   removeNotification: (id: string) => void;
 }
 
-const notificationState = create<NotificationState>((set) => ({
+export const notificationState = create<NotificationState>((set) => ({
   notifications: [],
   addNotification: (notification) =>
-    set((state) => ({
+   {
+     set((state) => ({
       notifications: [...state.notifications, notification],
-    })),
+    }))},
   removeNotification: (id) =>
     set((state) => ({
       notifications: state.notifications.filter((n) => n.id !== id),
     })),
 }));
-
-export default notificationState;
