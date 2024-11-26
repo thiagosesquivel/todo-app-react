@@ -1,31 +1,39 @@
-import axios from 'axios';
-import useAuthStore from '../features/auth/state/authStore';
+// src/provider/api/api.ts
+import axios, { AxiosInstance } from "axios";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true, 
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+/**
+ * Cria uma instância personalizada do Axios.
+ * @param token Token de autenticação (opcional).
+ * @param logout Função para logout em caso de erro 401.
+ * @returns Instância configurada do Axios.
+ */
+export const createApiClient = (
+  token: string | null,
+  logout: () => void
+): AxiosInstance => {
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL, // URL base da API
+    withCredentials: true, // Inclui cookies nas requisições
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-const token = localStorage.getItem('token');
-if (token) {
-  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  useAuthStore.getState().initialize(); // Seta o estado de autenticação
-}
-
-
-// Intercepta as respostas para lidar com erros 401
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      const logout = useAuthStore.getState().logout;
-      logout(); // Desloga o usuário e redireciona
-    }
-    return Promise.reject(error);
+  // Adiciona o token no cabeçalho, se disponível
+  if (token) {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
-);
 
-export default api;
+  // Configura os interceptores
+  api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response?.status === 401) {
+        logout(); // Executa o logout em caso de erro 401
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  return api;
+};
